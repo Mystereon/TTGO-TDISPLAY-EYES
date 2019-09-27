@@ -55,17 +55,9 @@
  #include <pgmspace.h>
 //#include "M5StackUpdater.h" // comment out M5StickC 
 //#include <driver/dac.h>     // comment out M5StickC 
-// Enable ONE of these #includes for the various eyes:
-#include "defaultEye.h"     // Standard human-ish hazel eye
-//#include "noScleraEye.h"  // Large iris, no sclera
-//#include "dragonEye.h"    // Slit pupil fiery dragon// -0x001 to 0x007F
-//#include "goatEye.h"      // Horizontal pupil goat  // -0x001 to 0x007F
-//#include "catEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "doeEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "terminatorEye.h"// #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "naugaEye.h"     // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "newtEye.h"      // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "owlEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
+
+#include "mdefaultEye.h"     // Standard human-ish hazel eye
+
  
 #define DISPLAY_DC      16 // Data/command pin for BOTH displays
 #define DISPLAY_RESET   23 // Reset pin for BOTH displays
