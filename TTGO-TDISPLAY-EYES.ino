@@ -58,7 +58,7 @@
 #define DISPLAY_DC      16 // Data/command pin for BOTH displays
 #define DISPLAY_RESET   23 // Reset pin for BOTH displays
 #define SELECT_L_PIN    5 // LEFT  eye chip select pin 
-//#define SELECT_R_PIN    37 // RIGHT eye chip select pin // comment out M5StickC 
+//#define SELECT_R_PIN    5 // RIGHT eye chip select pin // comment out M5StickC 
 // INPUT CONFIG (for eye motion -- enable or comment out as needed) --------
 // The ESP8266 is rather constrained here as it only has one analogue port.
 // An I2C ADC could be used for more analogue channels
@@ -67,7 +67,7 @@
 //#define JOYSTICK_X_FLIP   // If set, reverse stick X axis
 //#define JOYSTICK_Y_FLIP   // If set, reverse stick Y axis
 #define TRACKING          // If enabled, eyelid tracks pupil
-#define IRIS_PIN       00 // Photocell or potentiometer (else auto iris)
+//#define IRIS_PIN       00 // Photocell or potentiometer (else auto iris)
 //#define IRIS_PIN_FLIP  37 // If set, reverse reading from dial/photocell
 #define IRIS_SMOOTH       // If enabled, filter input from IRIS_PIN
 #define IRIS_MIN      140 // Clip lower analogRead() range from IRIS_PIN
