@@ -40,10 +40,7 @@
 // Inspired by David Boccabella's (Marcwolf) hybrid servo/OLED eye concept.
 //--------------------------------------------------------------------------
 */
-// M5StickC_uncannyEyes : 2019.05.08 modify by macsbug
-//  https://macsbug.wordpress.com/2019/05/08/m5stickc-electronic-animated-eyes/
-// M5Stack_uncannyEyes  : 2019.05.06 Transplant by macsbug
-//  https://macsbug.wordpress.com/2019/05/06/m5stack-electronic-animated-eyes/
+
 // Bodmer/ESP8266_uncannyEyes/ESP8266_uncannyEyes.ino
 //  https://github.com/Bodmer/ESP8266_uncannyEyes/blob/master/ESP8266_uncannyEyes.ino
 // graphics : catEye.h,terminatorEye.h,doeEye.h,naugaEye.h,newtEye.h,owlEye.h
@@ -53,15 +50,14 @@
 // adafruit/Uncanny_Eyes :
 //  https://github.com/adafruit/Uncanny_Eyes/tree/master/uncannyEyes
  #include <pgmspace.h>
-//#include "M5StackUpdater.h" // comment out M5StickC 
-//#include <driver/dac.h>     // comment out M5StickC 
+
 
 #include "mdefaultEye.h"     // Standard human-ish hazel eye
 
  
 #define DISPLAY_DC      16 // Data/command pin for BOTH displays
 #define DISPLAY_RESET   23 // Reset pin for BOTH displays
-#define SELECT_L_PIN    5 // LEFT  eye chip select pin // rev M5StickC 
+#define SELECT_L_PIN    5 // LEFT  eye chip select pin 
 //#define SELECT_R_PIN    37 // RIGHT eye chip select pin // comment out M5StickC 
 // INPUT CONFIG (for eye motion -- enable or comment out as needed) --------
 // The ESP8266 is rather constrained here as it only has one analogue port.
@@ -76,9 +72,9 @@
 #define IRIS_SMOOTH       // If enabled, filter input from IRIS_PIN
 #define IRIS_MIN      140 // Clip lower analogRead() range from IRIS_PIN
 #define IRIS_MAX      160//260 // Clip upper "
-#define WINK_L_PIN     35 // Pin for LEFT eye wink button // rev M5StickC 
-#define BLINK_PIN      35 // Pin for blink button (BOTH eyes) // rev M5StickC 
-//#define WINK_R_PIN     35 // Pin for RIGHT eye wink button // comment out M5StickC
+#define WINK_L_PIN     35 // Pin for LEFT eye wink button 
+#define BLINK_PIN      35 // Pin for blink button (BOTH eyes) 
+//#define WINK_R_PIN     35 // Pin for RIGHT eye wink button 
 #define AUTOBLINK         // If enabled, eyes blink autonomously
  
 // Probably don't need to edit any config below this line, -----------------
@@ -98,8 +94,8 @@ typedef struct {
 struct {
   uint8_t     cs;     // Chip select pin
   eyeBlink    blink;  // Current blink state
-} eye[] = { SELECT_L_PIN, { WINK_L_PIN, NOBLINK }//, // comment out M5StickC 
-           // SELECT_R_PIN, { WINK_R_PIN, NOBLINK }  // comment out M5StickC 
+} eye[] = { SELECT_L_PIN, { WINK_L_PIN, NOBLINK }//,  
+           // SELECT_R_PIN, { WINK_R_PIN, NOBLINK }  
 };
 TFT_eSPI tft = TFT_eSPI(135, 240); // Invoke custom library 
 #define NUM_EYES 1 //2
@@ -110,9 +106,9 @@ void setup(void) {
   tft.init();
   Serial.begin(115200);
   //Wire.begin();if(digitalRead(39)==0){updateFromFS(SD);ESP.restart();}//SD UPdate
-                                       // comment out M5StickC 
+                                      
   uint8_t e = 0;
-  //dac_output_disable(DAC_CHANNEL_1); // rev M5StickC 
+  //dac_output_disable(DAC_CHANNEL_1); 
   tft.fillScreen(TFT_BLACK);
   tft.setRotation(3);
   fstart = millis()-1; // Subtract 1 to avoid divide by zero later
@@ -139,8 +135,8 @@ void drawEye( // Renders one eye.  Inputs must be pre-clipped & valid.
   // around automatically from end of rect back to beginning, the region is
   // reset on each frame here in case of an SPI glitch.
   // tft.setAddrWindow(x axis, y axis, Horizontal width, Vertical width);
-  tft.setAddrWindow ( 16, -22, 128, 128 ); // rev M5StickC 
-  //if (e == 1){ tft.setAddrWindow (192,0,128,128);} // comment out M5StickC 
+  tft.setAddrWindow ( 16, -22, 128, 128 ); 
+  //if (e == 1){ tft.setAddrWindow (192,0,128,128);}  
   // Now just issue raw 16-bit values for every pixel...
   scleraXsave = scleraX; // Save initial X value to reset on each line
   irisY       = scleraY - (SCLERA_HEIGHT - IRIS_HEIGHT) / 2;
