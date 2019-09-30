@@ -57,16 +57,16 @@
 //#include <driver/dac.h>     // comment out M5StickC 
 // Enable ONE of these #includes for the various eyes:
  #define SYMMETRICAL_EYELID
-#include "mdefaultEye.h"     // Standard human-ish hazel eye
+//#include "mdefaultEye.h"     // Standard human-ish hazel eye
 //#include "noScleraEye.h"  // Large iris, no sclera
 //#include "dragonEye.h"    // Slit pupil fiery dragon// -0x001 to 0x007F
-//#include "goatEye.h"      // Horizontal pupil goat  // -0x001 to 0x007F
+//#include "MyEyeHuman2.h"      // Horizontal pupil goat  // -0x001 to 0x007F
 //#include "BlueFlameEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
 //#include "Human-HAL9000.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
 //#include "TerminatorEye.h"// #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "naugaEye.h"     // #include <pgmspace.h>,][ to *,= to PROGMEM=
+#include "MyEyeHuman1.h"     // #include <pgmspace.h>,][ to *,= to PROGMEM=
 //#include "SpiralGalaxy.h"      // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "Umbrella.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
+//#include "MyEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
  
 #define DISPLAY_DC      16 // Data/command pin for BOTH displays
 #define DISPLAY_RESET   23 // Reset pin for BOTH displays
@@ -80,11 +80,11 @@
 //#define JOYSTICK_X_FLIP   // If set, reverse stick X axis
 //#define JOYSTICK_Y_FLIP   // If set, reverse stick Y axis
 #define TRACKING          // If enabled, eyelid tracks pupil
-#define IRIS_PIN       00 // Photocell or potentiometer (else auto iris)
+//#define IRIS_PIN       00 // Photocell or potentiometer (else auto iris)
 //#define IRIS_PIN_FLIP  37 // If set, reverse reading from dial/photocell
 #define IRIS_SMOOTH       // If enabled, filter input from IRIS_PIN
-#define IRIS_MIN      40 // Clip lower analogRead() range from IRIS_PIN
-#define IRIS_MAX      250 // Clip upper "
+#define IRIS_MIN      100 // Clip lower analogRead() range from IRIS_PIN
+#define IRIS_MAX      300 // Clip upper "
 #define WINK_L_PIN     35 // Pin for LEFT eye wink button // rev M5StickC 
 #define BLINK_PIN      35 // Pin for blink button (BOTH eyes) // rev M5StickC 
 //#define WINK_R_PIN     35 // Pin for RIGHT eye wink button // comment out M5StickC
