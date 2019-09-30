@@ -52,20 +52,21 @@
 //  https://learn.adafruit.com/animated-electronic-eyes-using-teensy-3-1?view=all
 // adafruit/Uncanny_Eyes :
 //  https://github.com/adafruit/Uncanny_Eyes/tree/master/uncannyEyes
-#include <pgmspace.h>,][ to *,= to PROGMEM=
+#include <pgmspace.h>
 //#include "M5StackUpdater.h" // comment out M5StickC 
 //#include <driver/dac.h>     // comment out M5StickC 
 // Enable ONE of these #includes for the various eyes:
+ #define SYMMETRICAL_EYELID
 #include "mdefaultEye.h"     // Standard human-ish hazel eye
 //#include "noScleraEye.h"  // Large iris, no sclera
 //#include "dragonEye.h"    // Slit pupil fiery dragon// -0x001 to 0x007F
 //#include "goatEye.h"      // Horizontal pupil goat  // -0x001 to 0x007F
-//#include "catEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "doeEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "Eye-Biohazard-Red_EL.h"// #include <pgmspace.h>,][ to *,= to PROGMEM=
+//#include "BlueFlameEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
+//#include "Human-HAL9000.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
+//#include "TerminatorEye.h"// #include <pgmspace.h>,][ to *,= to PROGMEM=
 //#include "naugaEye.h"     // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "newtEye.h"      // #include <pgmspace.h>,][ to *,= to PROGMEM=
-//#include "owlEye.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
+//#include "SpiralGalaxy.h"      // #include <pgmspace.h>,][ to *,= to PROGMEM=
+//#include "Umbrella.h"       // #include <pgmspace.h>,][ to *,= to PROGMEM=
  
 #define DISPLAY_DC      16 // Data/command pin for BOTH displays
 #define DISPLAY_RESET   23 // Reset pin for BOTH displays
@@ -102,12 +103,12 @@ typedef struct {
   int32_t  duration;  // Duration of blink state (micros)
   uint32_t startTime; // Time (micros) of last state change
 } eyeBlink;
-#define SYMMETRICAL_EYELID
+
 struct {
   uint8_t     cs;     // Chip select pin
   eyeBlink    blink;  // Current blink state
-} eye[] = { SELECT_L_PIN, { WINK_L_PIN, NOBLINK }//, // comment out M5StickC 
-           // SELECT_R_PIN, { WINK_R_PIN, NOBLINK }  // comment out M5StickC 
+} eye[] = { SELECT_L_PIN, { WINK_L_PIN, NOBLINK }, // 
+           // SELECT_R_PIN, { WINK_R_PIN, NOBLINK }  
 };
 TFT_eSPI tft = TFT_eSPI(135, 240); // Invoke custom library 
 #define NUM_EYES 2 //2
@@ -117,10 +118,9 @@ uint32_t fstart = 0;  // start time to improve frame rate calculation at startup
 void setup(void) {
   tft.init();
   Serial.begin(115200);
-  //Wire.begin();if(digitalRead(39)==0){updateFromFS(SD);ESP.restart();}//SD UPdate
-                                       // comment out M5StickC 
+  
   uint8_t e = 0;
-  //dac_output_disable(DAC_CHANNEL_1); // rev M5StickC 
+  
   tft.fillScreen(TFT_BLACK);
   tft.setRotation(3);
   fstart = millis()-1; // Subtract 1 to avoid divide by zero later
@@ -128,7 +128,7 @@ void setup(void) {
 }
  
 // EYE-RENDERING FUNCTION --------------------------------------------------
-#define BUFFER_SIZE 256 // 64 to 512 seems optimum = 30 fps for default eye
+#define BUFFER_SIZE 512 // 64 to 512 seems optimum = 30 fps for default eye
 void drawEye( // Renders one eye.  Inputs must be pre-clipped & valid.
   // Use native 32 bit variables where possible as this is 10% faster!
   uint8_t  e,       // Eye array index; 0 or 1 for left/right
@@ -147,8 +147,8 @@ void drawEye( // Renders one eye.  Inputs must be pre-clipped & valid.
   // around automatically from end of rect back to beginning, the region is
   // reset on each frame here in case of an SPI glitch.
   // tft.setAddrWindow(x axis, y axis, Horizontal width, Vertical width);
-  tft.setAddrWindow ( -10, 0, 128, 128 ); // rev M5StickC 
-  if (e == 1){ tft.setAddrWindow (128,0,128,128);} // comment out M5StickC 
+  tft.setAddrWindow ( -10, 0, 128, 128 ); 
+  if (e == 1){ tft.setAddrWindow (128,0,128,128);}
   // Now just issue raw 16-bit values for every pixel...
   scleraXsave = scleraX; // Save initial X value to reset on each line
   irisY       = scleraY - (SCLERA_HEIGHT - IRIS_HEIGHT) / 2;
@@ -414,4 +414,5 @@ void loop() {
   oldIris = newIris;
 #endif // IRIS_PIN
 //screenshotToConsole();
+//tft.fillEllipse(120, 105, 50, 20,0xf800);
 }
